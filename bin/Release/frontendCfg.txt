@@ -1,0 +1,14 @@
+MAMELIST|D:\emulators\mame 0149\newList.txt
+MAMEINI|D:\emulators\mame 0149\mame.ini
+MAME|D:\emulators\mame 0149\my_mame64.exe
+ROMS|D:\emulators\mame 0149\roms
+SNAP|D:\emulators\mame 0149\snap
+CATVER|D:\source\ArcadeFrontEnd\catver.ini
+MAIN_JOYSTICK|0
+MAIN_SELECT|1
+MAIN_SKIP|2
+MAIN_OPTIONS|3
+COIN1|0,10
+COIN2|1,10
+COIN3|2,10
+COIN4|3,10
