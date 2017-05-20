@@ -61,8 +61,11 @@ int main(int argc, char ** argv)
 	screen->CopyPixels(letter, 8, 8, 50, 50);*/
 	
 	StockBitmapFont testFont;
-	testFont.Draw(screen, "C:\\porno pics\\some chick\\super hot.jpg", 8,80);
-
+	testFont.Draw(screen, "abcdefghijklmnopqrstuvwxyz", 2,80);
+	testFont.Draw(screen, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 2,90);
+	testFont.Draw(screen, "0123456789", 2,100);
+	testFont.Draw(screen, "!@#$%^&*()_+<>?:\";'/-=`~{}[]", 2,110);
+	
 	while (!quit)
 	{
 		SDL_UpdateTexture(texture, NULL, screen->pixels, screenW * sizeof(Uint32));
