@@ -51,6 +51,9 @@ set(MY_GAME_LIB_32_D $ENV{MY_X86_DEBUG_LIBS}/GameUtils.a)
 set(MY_GAME_LIB_64_D $ENV{MY_X64_DEBUG_LIBS}/GameUtils.a)
 set(MY_GAME_LIB_32_R $ENV{MY_X86_RELEASE_LIBS}/GameUtils.a)
 set(MY_GAME_LIB_64_R $ENV{MY_X64_RELEASE_LIBS}/GameUtils.a)
+
+MESSAGE("here is game util lib: ")
+MESSAGE(${MY_GAME_LIB_64_D})
 ENDIF()
 
 file(GLOB SOURCES
