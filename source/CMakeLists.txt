@@ -20,40 +20,39 @@ set(MY_GAME_LIB_32_R $ENV{MY_X86_RELEASE_LIBS}/GameUtils.lib)
 set(MY_GAME_LIB_64_R $ENV{MY_X64_RELEASE_LIBS}/GameUtils.lib)
 
 
-
-ELSEIF(APPLE)
-set(SDL2_32_LIB ${CMAKE_SOURCE_DIR}/lib/osx/x86/SDL2.a)
-set(SDL2_64_LIB ${CMAKE_SOURCE_DIR}/lib/osx/x64/SDL2.a)
-set(SDL2MAIN_32_LIB ${CMAKE_SOURCE_DIR}/lib/osx/x86/SDL2main.a)
-set(SDL2MAIN_64_LIB ${CMAKE_SOURCE_DIR}/lib/osx/x64/SDL2main.a)
-set(SDL2_TTF_32_LIB ${CMAKE_SOURCE_DIR}/lib/osx/x86/SDL2_ttf.a)
-set(SDL2_TTF_64_LIB ${CMAKE_SOURCE_DIR}/lib/osx/x64/SDL2_ttf.a)
-set(SDL2_IMAGE_32_LIB ${CMAKE_SOURCE_DIR}/lib/osx/x86/SDL2_image.a)
-set(SDL2_IMAGE_64_LIB ${CMAKE_SOURCE_DIR}/lib/osx/x64/SDL2_image.a)
-
-set(MY_GAME_LIB_32_D $ENV{MY_X86_DEBUG_LIBS}/GameUtils.a)
-set(MY_GAME_LIB_64_D $ENV{MY_X64_DEBUG_LIBS}/GameUtils.a)
-set(MY_GAME_LIB_32_R $ENV{MY_X86_RELEASE_LIBS}/GameUtils.a)
-set(MY_GAME_LIB_64_R $ENV{MY_X64_RELEASE_LIBS}/GameUtils.a)
- 
-
 ELSE()
-set(SDL2_32_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x86/SDL2.a)
-set(SDL2_64_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x64/SDL2.a)
-set(SDL2MAIN_32_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x86/SDL2main.a)
-set(SDL2MAIN_64_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x64/SDL2main.a)
-set(SDL2_TTF_32_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x86/SDL2_ttf.a)
-set(SDL2_TTF_64_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x64/SDL2_ttf.a)
-set(SDL2_IMAGE_32_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x86/SDL2_image.a)
-set(SDL2_IMAGE_64_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x64/SDL2_image.a)
 
-set(MY_GAME_LIB_32_D $ENV{MY_X86_DEBUG_LIBS}/GameUtils.a)
-set(MY_GAME_LIB_64_D $ENV{MY_X64_DEBUG_LIBS}/GameUtils.a)
-set(MY_GAME_LIB_32_R $ENV{MY_X86_RELEASE_LIBS}/GameUtils.a)
-set(MY_GAME_LIB_64_R $ENV{MY_X64_RELEASE_LIBS}/GameUtils.a)
 
-MESSAGE("here is game util lib: ")
-MESSAGE(${MY_GAME_LIB_64_D})
+find_package(SDL2 REQUIRED)
+
+INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS})
+
+
+#set(SDL2_32_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x86/SDL2.a)
+#set(SDL2MAIN_32_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x86/SDL2main.a)
+#set(SDL2_TTF_32_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x86/SDL2_ttf.a)
+#set(SDL2_IMAGE_32_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x86/SDL2_image.a)
+
+set(SDL2_64_LIB ${SDL2_LIBRARY})
+set(SDL2MAIN_64_LIB ${SDL2_MAIN_LIBRARY} )
+#set(SDL2_TTF_64_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x64/SDL2_ttf.a)
+#set(SDL2_IMAGE_64_LIB ${CMAKE_SOURCE_DIR}/lib/lin/x64/SDL2_image.a)
+
+MESSAGE("---------------------------")
+MESSAGE("${SDL2_INCLUDE_DIRS}")
+#MESSAGE("here is game util lib: ")
+#MESSAGE(${MY_GAME_LIB_64_D})
+MESSAGE("sdl lib: ")
+MESSAGE("${SDL2_LIBRARIES}")
+MESSAGE("---------------------------")
+
+#notice the "lib" in front of my stuff
+set(MY_GAME_LIB_32_D $ENV{MY_X86_DEBUG_LIBS}/libGameUtils.a)
+set(MY_GAME_LIB_64_D $ENV{MY_X64_DEBUG_LIBS}/libGameUtils.a)
+set(MY_GAME_LIB_32_R $ENV{MY_X86_RELEASE_LIBS}/libGameUtils.a)
+set(MY_GAME_LIB_64_R $ENV{MY_X64_RELEASE_LIBS}/libGameUtils.a)
+
+
 ENDIF()
 
 file(GLOB SOURCES
@@ -62,5 +61,5 @@ file(GLOB SOURCES
 add_executable(GameUtilsTest ${SOURCES})
 
 
-target_link_libraries (GameUtilsTest debug    ${SDL2_64_LIB} ${SDL2MAIN_64_LIB} ${SDL2_TTF_64_LIB} ${SDL2_IMAGE_64_LIB} ${MY_STRING_LIB_64_D} ${MY_GAME_LIB_64_D} )
+target_link_libraries (GameUtilsTest debug    ${SDL2_64_LIB} ${SDL2MAIN_64_LIB} ${SDL2_IMAGE_64_LIB} ${MY_STRING_LIB_64_D} ${MY_GAME_LIB_64_D} )
 #optimized ${SDL2_64_LIB} ${SDL2MAIN_64_LIB} ${SDL2_TTF_64_LIB} ${SDL2_IMAGE_64_LIB} ${MY_STRING_LIB_64_R} ${MY_GAME_LIB_64_R} ${MY_FILE_LIB_64_R} ${MY_CFG_LIB_64_R} )
