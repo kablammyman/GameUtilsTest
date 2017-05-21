@@ -26,7 +26,7 @@ int main(int argc, char ** argv)
 	//SDL_Texture * texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, screenW, screenH); 
 	SDL_Texture * texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, screenW, screenH);
 	
-	PIXMAP *img1 = new PIXMAP(100, 100);
+	PIXMAP *clippedImg = new PIXMAP(100, 100);
 	PIXMAP *img2 = new PIXMAP(10, 10);
 	PIXMAP *photo;
 //	Create1bppBin();
@@ -42,7 +42,7 @@ int main(int argc, char ** argv)
 
 	RGBA color1(255,0,0,255);
 	RGBA color2( 0,255,0,255 );
-	img1->Fill(color1);
+	clippedImg->Fill(color1);
 	img2->Fill(color2);
 	
 	Uint32 * rawPixels = new Uint32[screenW * screenH];
@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
 	memset(&rawPixels[153600], 200, screenW * 240 * sizeof(Uint32));
 
 	PIXMAP *screen = new PIXMAP(rawPixels, screenW, screenH);
-	img1->Blit(screen,100,100);
+	clippedImg->Blit(screen,750,550);
 
 
 /*	TileImage tiles((RGBA*)pix, iWidth, iHeight, 8, 8);
