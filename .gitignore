@@ -1,5 +1,9 @@
-ipch
-
+x64/
+Release/
+Debug/
+ipch/
 *.sdf
-.vs
-*.db
+.vs/
+*.suo
+build_vs2015/
+build_linux/
