@@ -52,20 +52,29 @@ int main(int argc, char ** argv)
 	slash = '\\';
 #endif
 	std::string exePath = argv[0];
-	std::size_t found = exePath.find_last_of("/\\");
-	std::string path = exePath.substr(0, found);
-	std::string soundPath = path + slash + "snd.wav";
-	std::string imgPath = path + slash + "img.png";
+	//std::size_t found = exePath.find_last_of("/\\");
+	//std::string path = exePath.substr(0, found);
+
+	//find the project folder
+	std::string baseFolderName = "GameUtilsTest";
+	size_t found = exePath.find(baseFolderName);
+	size_t folderNameLength = found + baseFolderName.size();
+
+	std::string path = exePath.substr(0, folderNameLength);
+	
+
+	std::string soundPath = path + slash + "sounds" + slash + "snd.wav";
+	std::string imgPath =  path + slash + "images" + slash + "img.png";
 	static SDL_AudioSpec wav_spec; // the specs of our piece of music
 	SDL_AudioFormat x;
 
-	SoundUtils *sound = new SoundUtils(soundPath.c_str());
+	/*SoundUtils *sound = new SoundUtils(soundPath.c_str());
 		
 	static Uint32 wav_length; // length of our sample
 	static Uint8 *wav_buffer; // buffer containing our audio file
-	/*if (SDL_LoadWAV(soundPath.c_str(), &wav_spec, &wav_buffer, &wav_length) == NULL) {
-		return 1;
-	}*/
+	//if (SDL_LoadWAV(soundPath.c_str(), &wav_spec, &wav_buffer, &wav_length) == NULL) {
+	//	return 1;
+	//}
 	wav_spec.freq = sound->avg_bytes_sec;                   //< DSP frequency -- samples per second 
 	wav_spec.format = 32784;     //< Audio data format 
 	wav_spec.channels = sound->channels;             //< Number of channels: 1 mono, 2 stereo 
@@ -77,9 +86,9 @@ int main(int argc, char ** argv)
 	// set the callback function
 	wav_spec.callback = my_audio_callback;
 	wav_spec.userdata = NULL;
-	
+	*/
 
-	/* Open the audio device */
+	// Open the audio device 
 	if (SDL_OpenAudio(&wav_spec, NULL) < 0) {
 		fprintf(stderr, "Couldn't open audio: %s\n", SDL_GetError());
 		exit(-1);
@@ -98,6 +107,11 @@ int main(int argc, char ** argv)
 	int iBitDepth = 8, iWidth = 256, iHeight = 128;
 	unsigned char *pix;
 	int error = lodepng_decode_file(&pix,(unsigned int*)&iWidth, (unsigned int*)&iHeight, imgPath.c_str(),LCT_RGBA, iBitDepth);
+	if (error != 0)
+	{
+		printf("lodepng error: %d\nprob souclnt open a file\n", error );
+		exit(1);
+	}
 	photo = new PIXMAP(pix, iWidth, iHeight, true);
 
 
@@ -146,7 +160,7 @@ int main(int argc, char ** argv)
 			{
 				leftMouseButtonDown = true;
 
-				audio_pos = sound->GetSoundBuffer();
+				/*audio_pos = sound->GetSoundBuffer();
 				audio_len = sound->GetSoundSize(); // copy file length
 
 				SDL_PauseAudio(0);//unpause
@@ -154,7 +168,7 @@ int main(int argc, char ** argv)
 				// wait until we're don't playing
 				while (audio_len > 0) {
 					SDL_Delay(100);
-				}
+				}*/
 			}
 		case SDL_MOUSEMOTION:
 			if (leftMouseButtonDown)
