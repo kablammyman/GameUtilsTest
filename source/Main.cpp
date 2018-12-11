@@ -109,7 +109,7 @@ int main(int argc, char ** argv)
 	int error = lodepng_decode_file(&pix,(unsigned int*)&iWidth, (unsigned int*)&iHeight, imgPath.c_str(),LCT_RGBA, iBitDepth);
 	if (error != 0)
 	{
-		printf("lodepng error: %d\nprob souclnt open a file\n", error );
+		printf("lodepng error: %d\ncouldt open a file\n%s\n", error,imgPath.c_str() );
 		exit(1);
 	}
 	photo = new PIXMAP(pix, iWidth, iHeight, true);
