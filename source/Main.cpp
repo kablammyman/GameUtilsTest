@@ -125,8 +125,8 @@ int main(int argc, char ** argv)
 	memset(&rawPixels[153600], 200, screenW * 240 * sizeof(Uint32));
 
 	PIXMAP *screen = new PIXMAP(rawPixels, screenW, screenH);
-	clippedImg->Blit(screen,750,550);
-	photo->Blit(screen, 100, 100);
+	clippedImg->Blit(screen,-80,550);
+	photo->Blit(screen, -250, 100);
 	
 
 	
