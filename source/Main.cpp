@@ -48,19 +48,25 @@ int main(int argc, char ** argv)
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 		return 1;
 
+    std::string exePath;
+	std::string path;
+    printf("%s\n",exePath.c_str());
+
 #ifdef WIN32
 	slash = '\\';
-#endif
-	std::string exePath = argv[0];
-	//std::size_t found = exePath.find_last_of("/\\");
+    //std::size_t found = exePath.find_last_of("/\\");
 	//std::string path = exePath.substr(0, found);
 
 	//find the project folder
 	std::string baseFolderName = "GameUtilsTest";
 	size_t found = exePath.find(baseFolderName);
 	size_t folderNameLength = found + baseFolderName.size();
-
-	std::string path = exePath.substr(0, folderNameLength);
+    exePath = argv[0];
+	path = exePath.substr(0, folderNameLength);
+#else
+    path = "../..";
+#endif
+	
 	
 
 	std::string soundPath = path + slash + "sounds" + slash + "snd.wav";

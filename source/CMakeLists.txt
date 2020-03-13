@@ -1,7 +1,7 @@
 project(GameUtilsTest)
 include_directories($ENV{MY_GAME_UTILS} )
 include_directories($ENV{MY_STRING_UTILS} )
-
+message( $ENV{MY_STRING_UTILS} ) 
 
 IF(WIN32)
 include_directories(${CMAKE_SOURCE_DIR}/include) 
