@@ -56,12 +56,13 @@ int main(int argc, char ** argv)
 	slash = '\\';
     //std::size_t found = exePath.find_last_of("/\\");
 	//std::string path = exePath.substr(0, found);
+	exePath = argv[0];
 
 	//find the project folder
 	std::string baseFolderName = "GameUtilsTest";
 	size_t found = exePath.find(baseFolderName);
 	size_t folderNameLength = found + baseFolderName.size();
-    exePath = argv[0];
+    
 	path = exePath.substr(0, folderNameLength);
 #else
     path = "../..";
